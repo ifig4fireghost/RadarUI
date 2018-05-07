@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>texture/loading.gif</file>
+        <file>texture/about.png</file>
+        <file>texture/skin.png</file>
+    </qresource>
+</RCC>

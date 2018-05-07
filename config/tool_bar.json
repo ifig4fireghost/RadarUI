@@ -1,0 +1,5 @@
+{
+"tools": [
+{"Text": "About", "ObjectName": "tool_show_about", "ToolTips": "ShowAbout", "Icon": ":/texture/about.png", "Checkable": false, "Action": "I :/config/about.dat"},
+{"Text": "Skin", "ObjectName": "tool_change_skin", "ToolTips": "ChangeSkin", "Icon": ":/texture/skin.png", "Checkable": false, "Action": "D ChangeSkin"}]
+}

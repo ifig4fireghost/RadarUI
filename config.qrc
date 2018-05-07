@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>config/tool_bar.dat</file>
+        <file>config/about.dat</file>
+    </qresource>
+</RCC>
