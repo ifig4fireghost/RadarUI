@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	ChangeStyle::setStyle(":/qss/white.qss");
+	ChangeStyle::setStyle(":/qss/all.qss");
 	MainWindow w;
 	CoreRouter::GetInstance(&w);
 	w.show();

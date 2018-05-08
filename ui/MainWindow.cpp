@@ -112,7 +112,6 @@ void MainWindow::OnReadData(const QByteArray& raw)
 {
 	if (raw.length() == 2) {
 		QString dat(raw);
-		Libs::Log2Console(dat);
 		if (dat == "CF" || dat == "PF") {
 			Libs::Log2Console("Connect to server failed");
 			emit dataready(false);

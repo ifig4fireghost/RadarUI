@@ -67,21 +67,26 @@ void LmsDataParser::Parse(const QByteArray &data)
 	} else {
 		ssa = ssa_t.toULong(nullptr, 16) / 10000 * Pi / 180;
 	}
+	cout << "扫描开始角度:" << ssa << endl;
+	if (ssa < 0 || ssa > Pi) {
+		cout << "扫描开始角度有误，请检查原因！" << endl;
+		return;
+	}
 	double srt = double(all[SRT].toUInt(nullptr, 16)) / 10000 * Pi / 180;
+	cout << "分辨率:" << srt << endl;
 	int sdn = all[SDN].toUInt(nullptr, 16);
-
+	cout << "总点数:" << sdn << endl;
 	bool fd2 = false;
 	if (all[Ratio][0] == '4') {
 		fd2 = true;
 	}
-
 	points->clear();
 	for (int i = MDS; i < MDS + sdn; ++i) {
 		int md = all[i].toUInt(nullptr, 16);
 		if (fd2) {
 			md >>= 1;
 		}
-		if (md > 7000 || md < 5000) continue;//?_?
+		//if (md > 7000 || md < 5000) continue;//?_?
 		double angle = ssa + i * srt;
 		if (angle > Pi * 4 / 9 && angle < Pi * 5 / 9) {//?_?
 			points->push_back(QPointF(md * cos(angle), md * sin(angle)));

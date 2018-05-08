@@ -80,6 +80,7 @@ void Libs::OnWrite(QString dat)
 void Libs::OnDataReady()
 {
 	QByteArray dat = QByteArray::fromBase64(sock->readAll());
+	Log2Console(QString(dat));
 	emit dataready(dat);
 }
 
