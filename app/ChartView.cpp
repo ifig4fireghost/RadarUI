@@ -81,7 +81,6 @@ void ChartView::OnUpdatePoints(const QList<QPointF>* points)
 		*series << p;
 		ui->lb_lcz->setText(QString("%1").arg(p.x()));
 		ui->lb_dg->setText(QString("%1").arg(p.y()));
-		cout << p.x() << " " << p.y() << endl;
 	}
 }
 

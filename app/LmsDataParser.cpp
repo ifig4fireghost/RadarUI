@@ -1,7 +1,7 @@
 #include "LmsDataParser.h"
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 using std::cout;
 using std::endl;
@@ -63,12 +63,12 @@ void LmsDataParser::Parse(const QByteArray &data)
 	QByteArray ssa_t = all[SSA];
 	double ssa;
 	if (ssa_t[0] == 'F') {
-		ssa = (~ssa_t.toUInt(nullptr, 16) + 1) / 10000 * Pi / 180;
+		ssa = -((~ssa_t.toUInt(nullptr, 16) + 1) / 10000 * Pi / 180);
 	} else {
 		ssa = ssa_t.toULong(nullptr, 16) / 10000 * Pi / 180;
 	}
 	cout << "扫描开始角度:" << ssa << endl;
-	if (ssa < 0 || ssa > Pi) {
+	if (ssa < -1 || ssa > Pi) {
 		cout << "扫描开始角度有误，请检查原因！" << endl;
 		return;
 	}
@@ -86,8 +86,8 @@ void LmsDataParser::Parse(const QByteArray &data)
 		if (fd2) {
 			md >>= 1;
 		}
-		//if (md > 7000 || md < 5000) continue;//?_?
-		double angle = ssa + i * srt;
+		//if (md > 7000 || md < 5000) continue;
+		double angle = ssa + (i - MDS) * srt;
 		if (angle > Pi * 4 / 9 && angle < Pi * 5 / 9) {//?_?
 			points->push_back(QPointF(md * cos(angle), md * sin(angle)));
 		}
