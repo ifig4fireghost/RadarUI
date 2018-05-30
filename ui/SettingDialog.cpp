@@ -19,6 +19,11 @@ SettingDialog::SettingDialog(QWidget *parent) :
 
 	pAnimation = new QPropertyAnimation(this, "geometry");
 	pDesktopWidget = qApp->desktop();
+
+	setting.beginGroup("SettingDialog");
+	ui->le_ip->setText(setting.value("ip", "192.168.1.20").toString());
+	ui->le_port->setText(setting.value("port", "2111").toString());
+	setting.endGroup();
 }
 
 SettingDialog::~SettingDialog()
@@ -35,6 +40,11 @@ void SettingDialog::on_btn_ok_clicked()
 	ui->le_ip->setEnabled(false);
 	ui->le_port->setEnabled(false);
 	ui->lb_hint->setVisible(false);
+	setting.beginGroup("SettingDialog");
+	setting.setValue("ip", ip);
+	setting.setValue("port", port);
+	setting.endGroup();
+
 	emit set(ip, port);
 }
 

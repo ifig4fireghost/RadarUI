@@ -29,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	}
 	showMessage("hi, at your service ^_^");
 
+	setting = CoreRouter::GetInstance().GetSettings();
+
 	process = new QProcess();
 	process->setProgram("Radar");
 
@@ -108,6 +110,11 @@ void MainWindow::OnSet(const QString &ip, const QString &port)
 	emit write(QString("&C=CT=%1:%2").arg(ip).arg(port));
 }
 
+void MainWindow::OnHeightChanged(double h)
+{
+	setting->setValue("line_standard_height", h);
+}
+
 void MainWindow::OnReadData(const QByteArray& raw)
 {
 	if (raw.length() == 2) {
@@ -120,9 +127,12 @@ void MainWindow::OnReadData(const QByteArray& raw)
 			emit dataready(true);
 
 			ChartView* cv = new ChartView(this);
+			connect(cv, SIGNAL(HeightChanged(double)), &(LmsDataParser::GetInstace()), SLOT(OnHeightChanged(double)));
+			connect(cv, SIGNAL(HeightChanged(double)), this, SLOT(OnHeightChanged(double)));
+			connect(this, SIGNAL(updatepoints(const QList<QPointF>*)), cv, SLOT(OnUpdatePoints(const QList<QPointF>*)));
+			cv->ChangeHeight(setting->value("line_standard_height", 6.5).toDouble());
 			cv->setFixedSize(QSize(960, 640));
 			ui->model_view->addWidget(cv);
-			connect(this, SIGNAL(updatepoints(const QList<QPointF>*)), cv, SLOT(OnUpdatePoints(const QList<QPointF>*)));
 			this->show();
 			timer_data = new QBasicTimer;
 			timer_data->start(1000, this);

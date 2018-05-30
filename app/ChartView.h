@@ -18,9 +18,14 @@ public:
 	explicit ChartView(QWidget *parent = 0);
 	~ChartView();
 	void keyPressEvent(QKeyEvent*);
-
+	void ChangeHeight(double);
+signals:
+	void HeightChanged(double);
 public slots:
 	void OnUpdatePoints(const QList<QPointF>* points);
+private slots:
+	void on_et_standard_editingFinished();
+
 private:
 	Ui::ChartView *ui;
 	QScatterSeries* series;

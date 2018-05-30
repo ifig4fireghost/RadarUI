@@ -84,3 +84,13 @@ void ChartView::OnUpdatePoints(const QList<QPointF>* points)
 	}
 }
 
+void ChartView::ChangeHeight(double h)
+{
+	ui->et_standard->setText(QString::number(h));
+}
+
+void ChartView::on_et_standard_editingFinished()
+{
+	double h = ui->et_standard->text().toDouble();
+	emit HeightChanged(h);
+}

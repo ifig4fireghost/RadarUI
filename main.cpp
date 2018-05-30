@@ -26,6 +26,10 @@ int main(int argc, char *argv[])
 
 	ObjectFactory::registerClass<ChangeSkin>();
 
+	QCoreApplication::setOrganizationName("fireghost");
+	QCoreApplication::setOrganizationDomain("ifig.fireghost");
+	QCoreApplication::setApplicationName("RadarUId");
+
 	struct sigaction act;
 	act.sa_handler = onsignal;
 	sigemptyset(&act.sa_mask);

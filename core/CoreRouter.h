@@ -2,6 +2,7 @@
 #define COREROUTER_H
 
 #include <QObject>
+#include <QSettings>
 #include <QToolBar>
 
 #include "MainWindow.h"
@@ -15,6 +16,7 @@ public:
 	~CoreRouter();
 	static void MoveTo(QSize s, QWidget *w);
 
+	QSettings* GetSettings();
 	void RegistMetaObject(const QString&, const QMetaObject&);
 
 	bool ConfigFileLoader(const QString&, QVariantMap *&);

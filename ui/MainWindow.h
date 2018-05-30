@@ -5,6 +5,7 @@
 #include <QBasicTimer>
 #include <QCloseEvent>
 #include <QProcess>
+#include <QSettings>
 
 #include "UIWaiting.h"
 
@@ -34,13 +35,15 @@ private slots:
 	void OnReadData(const QByteArray& raw);
 	void OnClose();
 	void OnSignal(int sig);
+	void OnHeightChanged(double);
 
 private:
 	Ui::MainWindow *ui;
-	QBasicTimer* timer_load;
-	QBasicTimer* timer_data;
-	UIWaiting* wb;
-	QProcess* process;
+	QBasicTimer *timer_load;
+	QBasicTimer *timer_data;
+	UIWaiting *wb;
+	QProcess *process;
+	QSettings *setting;
 	void load_tool_bar();
 };
 

@@ -53,6 +53,12 @@ LmsDataParser& LmsDataParser::GetInstace()
 	return lms;
 }
 
+void LmsDataParser::OnHeightChanged(double h)
+{
+	height = h * 1000;
+	cout << "标准高度变更为:" << height << endl;
+}
+
 void LmsDataParser::Parse(const QByteArray &data)
 {
 	QList<QByteArray> all = data.split(' ');
@@ -86,9 +92,9 @@ void LmsDataParser::Parse(const QByteArray &data)
 		if (fd2) {
 			md >>= 1;
 		}
-		//if (md > 7000 || md < 5000) continue;
+		if (md > height + 1000 || md < height - 1000) continue;
 		double angle = ssa + (i - MDS) * srt;
-		if (angle > Pi * 4 / 9 && angle < Pi * 5 / 9) {//?_?
+		if (angle > Pi * 4 / 9 && angle < Pi * 5 / 9) {
 			points->push_back(QPointF(md * cos(angle), md * sin(angle)));
 		}
 	}

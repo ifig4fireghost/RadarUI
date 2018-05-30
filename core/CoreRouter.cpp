@@ -29,6 +29,12 @@ CoreRouter& CoreRouter::GetInstance(MainWindow *main)
 	return core;
 }
 
+QSettings* CoreRouter::GetSettings()
+{
+	static QSettings s;
+	return &s;
+}
+
 void CoreRouter::OnSignal(int sig)
 {
 	emit onsignal(sig);

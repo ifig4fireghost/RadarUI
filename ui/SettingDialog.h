@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QDesktopWidget>
 #include <QPropertyAnimation>
+#include <QSettings>
 
 namespace Ui {
 class SettingDialog;
@@ -31,6 +32,7 @@ private:
 	Ui::SettingDialog *ui;
 	QPropertyAnimation *pAnimation;
 	QDesktopWidget *pDesktopWidget;
+	QSettings setting;
 };
 
 #endif // SETTINGDIALOG_H
